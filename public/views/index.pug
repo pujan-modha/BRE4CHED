@@ -1,0 +1,12 @@
+extends base
+
+block content 
+  h1 Welcome to BRE4CHED.
+  h6 Note: Avoid using Mobile Phone / Tablet for better experience.
+  //- video(src="/assets/BRE4CHED.mp4" autoplay loop playsinline)
+  if user    
+    a(class="waves-effect waves-light btn home-cta" href="/play") Play
+  else
+    a(class="waves-effect waves-light btn home-cta" href="/login") Login
+    div(style="margin: 5px 0;")
+    a(class="waves-effect waves-light btn home-cta" href="/register") Register
