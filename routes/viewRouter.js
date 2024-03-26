@@ -43,6 +43,14 @@ router.get("/play", async (req, res) => {
   });
 });
 
+router.get("/story", async (req, res) => {
+  const question = await playController.getViewQuestion(req);
+  res.status(200).render("story", {
+    question,
+    title: "Story",
+  });
+});
+
 router.get("/newQuestion", async (req, res) => {
   res.status(200).render("addQuestion", {
     title: "New Question",

@@ -1,15 +1,17 @@
 // submitting login form
 const loginForm = document.querySelector(".login-form");
 
-const loginUser = async (problem, answer, hint, level) => {
+const loginUser = async (levelName, problem, answer, hint, hintText, level) => {
 	try {
 		const res = await axios({
 			method: "POST",
 			url: "/api/v1/questions",
 			data: {
+				levelName,
 				problem,
                 answer, 
-                hint, 
+				hint,
+				hintText,
                 level
 			},
 		});
@@ -27,10 +29,12 @@ const loginUser = async (problem, answer, hint, level) => {
 
 loginForm.addEventListener("submit", (e) => {
 	e.preventDefault();
+	const levelName = document.getElementById("levelName").value;
 	const problem = document.getElementById("statement").value;
 	const answer = document.getElementById("answer").value;
 	const hint = document.getElementById("hint").value;
+	const hintText = document.getElementById("hintText").value;
 	const level = document.getElementById("level").value;
 
-	loginUser(problem, answer, hint, level);
+	loginUser(levelName, problem, answer, hint, hintText, level);
 });

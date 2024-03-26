@@ -13,11 +13,18 @@ const questionSchema = new mongoose.Schema({
   },
   hint: {
     type: String,
-    required: [true, "Please provide user hint!"],
+    // required: [true, "Please provide user hint!"],
+  },
+  hintText: {
+    type: String,
+    // required: [true, "Please provide hint text!"],
+  },
+  levelName: {
+    type: String,
   },
   level: {
     type: Number,
-    min: 1,
+    min: 0,
     unique: true,
     required: [true, "Please provide level number!"],
   },

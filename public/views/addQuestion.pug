@@ -5,13 +5,19 @@ block content
   .login-form
     form
       label.login-form__username Problem Statement
-      input#statement(type='text' name='problem' placeholder='State the question' required)
+      textarea#statement(type='text' name='problem' placeholder='State the question' required)
 
-      label.login-form__username Answer 
+      label.login-form__username Level Name
+      input#levelName(type='text' name='levelName' placeholder='Level Name' required)
+
+      label.login-form__username Answer
       input#answer(type='text' name='answer' placeholder='Enter Answer' required)
 
-      label.login-form__username Hint
-      input#hint(type='text' name='hint' placeholder='Help the contestants out' required)
+      label.login-form__username Link
+      input#hint(type='text' name='hint' placeholder='Link')
+
+      label.login-form__username Link Text
+      input#hintText(type='text' name='hintText' placeholder='Link Text')
 
       label.login-form__username Level Number
       input#level(type='text' name='level' placeholder='Problem level number' required)

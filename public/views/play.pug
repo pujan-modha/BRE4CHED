@@ -5,8 +5,10 @@ block content
     h2 Congratulations!
   else 
     h3 Level #{question.level+1}
-    h4= question.problem
-    p.hint Hint:  #{question.hint}
+    h5 #{question.levelName}
+    h6(style="width: 70vw")= question.problem
+    if question.hint
+      a(href=question.hint target="_noref").hint  #{question.hintText}
 
     form.question-form
       label.login-form__username Answer
