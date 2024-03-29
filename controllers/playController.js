@@ -7,113 +7,113 @@ const AppError = require("../utils/appError");
 
 // 00. Get total number of questions
 const getTotalQuestions = async () => {
-	let number = await Question.countDocuments({});
-	return number;
+  let number = await Question.countDocuments({});
+  return number;
 };
 
 // 01. Gets question for the user based on its current level
 exports.getQuestion = catchAsync(async (req, res, next) => {
-	// If user has completed the quiz
-	if (req.user.level + 1 >= (await getTotalQuestions())) {
-		return res.status(200).json({
-			status: "success",
-			message: "Congratulations you have completed BRE4CHED!",
-		});
-	}
+  // If user has completed the quiz
+  if (req.user.level + 1 >= (await getTotalQuestions())) {
+    return res.status(200).json({
+      status: "success",
+      message: "Congratulations you have completed BRE4CHED!",
+    });
+  }
 
-	const question = await Question.findOne({ level: req.user.level });
+  const question = await Question.findOne({ level: req.user.level });
 
-	if (!question) {
-		throw new AppError("This question does not exist. (yet?).", 403);
-	}
+  if (!question) {
+    throw new AppError("This question does not exist. (yet?).", 403);
+  }
 
-	res.status(200).json({
-		status: "success",
-		data: {
-			question,
-		},
-	});
+  res.status(200).json({
+    status: "success",
+    data: {
+      question,
+    },
+  });
 });
 
 // 01A. Get Question for view controller
 exports.getViewQuestion = async (req) => {
-	const questionObject = {};
-	if (req.user.level + 1 > (await getTotalQuestions())) {
-		questionObject.completed = true;
-		return questionObject;
-	}
+  const questionObject = {};
+  if (req.user.level + 1 > (await getTotalQuestions())) {
+    questionObject.completed = true;
+    return questionObject;
+  }
 
-	const question = await Question.findOne({ level: req.user.level });
+  const question = await Question.findOne({ level: req.user.level });
 
-	if (!question) {
-		questionObject.completed = true;
-		return questionObject;
-	}
+  if (!question) {
+    questionObject.completed = true;
+    return questionObject;
+  }
 
-	return question;
+  return question;
 };
 
 // 02. Checks user answer for its level
 exports.checkAnswer = catchAsync(async (req, res, next) => {
-	const { level, username } = req.user;
-	const question = await Question.findOne({ level }).select("+answer");
+  const { level, username } = req.user;
+  const question = await Question.findOne({ level }).select("+answer");
 
-	if (!question) {
-		throw new AppError("This question does not exist. (yet?).", 403);
-	}
+  if (!question) {
+    throw new AppError("This question does not exist. (yet?).", 403);
+  }
 
-	await Response.create({
-		answer: req.body.answer,
-		level,
-		username,
-	});
+  await Response.create({
+    answer: req.body.answer,
+    level,
+    username,
+  });
 
-	if (question.answer !== req.body.answer) {
-		throw new AppError("Incorrect Answer!!", 400);
-	}
+  if (question.answer.toLowerCase != req.body.answer.toLowerCase) {
+    throw new AppError("Incorrect Answer!!", 400);
+  }
 
-	if (question.level + 1 >= (await getTotalQuestions())) {
-		const newLevel = question.level + 1;
+  if (question.level + 1 >= (await getTotalQuestions())) {
+    const newLevel = question.level + 1;
 
-		await User.findByIdAndUpdate(req.user._id, {
-			level: newLevel,
-			lastSolved: Date.now(),
-		});
+    await User.findByIdAndUpdate(req.user._id, {
+      level: newLevel,
+      lastSolved: Date.now(),
+    });
 
-		return res.status(200).json({
-			status: "success",
-			message: "Congratulations you have completed BRE4CHED!",
-		});
-	}
+    return res.status(200).json({
+      status: "success",
+      message: "Congratulations you have completed BRE4CHED!",
+    });
+  }
 
-	const newLevel = question.level + 1;
+  const newLevel = question.level + 1;
 
-	await User.findByIdAndUpdate(req.user._id, {
-		level: newLevel,
-		lastSolved: Date.now(),
-	});
+  await User.findByIdAndUpdate(req.user._id, {
+    level: newLevel,
+    lastSolved: Date.now(),
+  });
 
-	res.status(200).json({
-		status: "success",
-		message: "Correct Answer!!",
-	});
+  res.status(200).json({
+    status: "success",
+    message: "Correct Answer!!",
+  });
 });
 
 // 03. Get the game dashboard
 exports.getDashboard = catchAsync(async (req, res, next) => {
-	const users = await User.find().sort("-level lastSolved");
+  const users = await User.find().sort("-level lastSolved");
 
-	res.status(200).json({
-		status: "success",
-		data: {
-			users,
-		},
-	});
+  res.status(200).json({
+    status: "success",
+    data: {
+      users,
+    },
+  });
 });
 
 // 03A. Get the game dashboard
 exports.getDashboardView = async (req, res, next) => {
-	const users = await User.find().sort("-level lastSolved");
+  const users = await User.find().sort("-level lastSolved");
 
-	return users;
+  return users;
 };
