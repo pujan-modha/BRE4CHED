@@ -68,7 +68,7 @@ exports.checkAnswer = catchAsync(async (req, res, next) => {
     username,
   });
 
-  if (question.answer.toLowerCase !== req.body.answer.toLowerCase) {
+  if (question.answer.toLowerCase() !== req.body.answer.toLowerCase()) {
     throw new AppError("Incorrect Answer!!", 400);
   }
 
