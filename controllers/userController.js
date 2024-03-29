@@ -47,12 +47,12 @@ exports.signupUser = catchAsync(async (req, res, next) => {
 
 // 2. Login User
 exports.loginUser = catchAsync(async (req, res, next) => {
-	const { username, password } = req.body;
+	const { email, password } = req.body;
 
-	const foundUser = await User.findOne({ username }).select("+password");
+	const foundUser = await User.findOne({ email }).select("+password");
 
 	if (!foundUser) {
-		throw new AppError("Invalid username or password. Please try again!", 404);
+		throw new AppError("Invalid email or password. Please try again!", 404);
 	}
 
 	const checked = await foundUser.comparePassword(password, foundUser.password);

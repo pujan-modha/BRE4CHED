@@ -1,15 +1,16 @@
 extends base
 
 block content 
-  h1 Welcome to BRE4CHED
-  h6 Note: Avoid using Mobile Phone / Tablet for better experience.
-  if user 
-    video(src="/assets/BRE4CHED.mp4" autoplay playsinline style="width: 640px")   
-    a(class="waves-effect waves-light btn home-cta" href="/story" style="margin: 15px") Continue
-  else
-    div(style="margin: 15vh; display: flex; flex-direction: column; align-items: center; justify-content: center;")
-      a(class="waves-effect waves-light btn home-cta" href="/login" style="margin: 15px") Login
-      a(class="waves-effect waves-light btn home-cta" href="/register") Register
+  div(style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;")
+    h1 Welcome to BRE4CHED
+    h6 Note: Avoid using Mobile Phone / Tablet for better experience.
+    if user 
+      video(src="/assets/BRE4CHED.mp4" autoplay playsinline style="width: 640px")   
+      a(class="waves-effect waves-light btn home-cta" href="/story" style="margin: 15px") Continue
+    else
+      div(style="margin-top: 0vh; display: flex; flex-direction: column; align-items: center; justify-content: center;")
+        a(class="waves-effect waves-light btn home-cta" href="/login" style="margin: 15px") Login
+        a(class="waves-effect waves-light btn home-cta" href="/register") Register
   div(style="margin-top: auto")
     p
     | Made with ❤️ by 
