@@ -2,10 +2,14 @@ extends base
 
 block content
   h1 Register
+  p Note: Please use the same email that was used during Unstop registration.
   .login-form
     form
       label.login-form__username Username
       input#username(type='text' name='username' placeholder='username' required)
+
+      label.login-form__email Email Address
+      input#email(type='email' name='email' placeholder='bre4ched@ieeemuj.com' required)
 
       label.login-form__password Password
       input#password(type='password' name='password' placeholder='********' required)

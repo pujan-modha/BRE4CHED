@@ -36,6 +36,7 @@ const generateJwt = async (user, res) => {
 exports.signupUser = catchAsync(async (req, res, next) => {
 	const userInfo = {
 		username: req.body.username,
+		email: req.body.email,
 		password: req.body.password,
 	};
 
