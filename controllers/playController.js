@@ -69,7 +69,7 @@ exports.checkAnswer = catchAsync(async (req, res, next) => {
 	});
 
 	if (question.answer !== req.body.answer) {
-		throw new AppError("Wrong answer, please try again", 400);
+		throw new AppError("Incorrect Answer!!", 400);
 	}
 
 	if (question.level + 1 >= (await getTotalQuestions())) {
@@ -95,7 +95,7 @@ exports.checkAnswer = catchAsync(async (req, res, next) => {
 
 	res.status(200).json({
 		status: "success",
-		message: `Welcome to level ${newLevel} `,
+		message: "Correct Answer!!",
 	});
 });
 

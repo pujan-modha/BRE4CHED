@@ -5,6 +5,20 @@
   box-sizing: border-box;
   font-family: "JetBrains Mono", monospace;
   user-select: none;
+  overflow-x: hidden;
+}
+
+textarea {
+  font-family: "JetBrains Mono", monospace;
+  border: none;
+  outline: none;
+  resize: none;
+  overflow: auto;
+}
+
+textarea::selection {
+  background-color: transparent;
+  user-select: none;
 }
 
 .nav__top {

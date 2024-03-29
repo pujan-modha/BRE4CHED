@@ -43,6 +43,14 @@ router.get("/play", async (req, res) => {
   });
 });
 
+router.get("/_eTFrIE0bMA", async (req, res) => {
+  const question = await playController.getViewQuestion(req);
+  res.status(200).render("level8", {
+    question,
+    title: "ebuTouY",
+  });
+});
+
 router.get("/story", async (req, res) => {
   const question = await playController.getViewQuestion(req);
   res.status(200).render("story", {

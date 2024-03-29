@@ -6,7 +6,7 @@ block content
   else 
     h3 Level #{question.level+1}
     h5 #{question.levelName}
-    h6(style="width: 70vw")= question.problem
+    p(style="width: 70vw; white-space: pre-wrap;")= question.problem
     if question.hint
       a(href=question.hint target="_noref").hint  #{question.hintText}
 

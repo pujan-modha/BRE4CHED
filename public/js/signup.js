@@ -16,7 +16,7 @@ const signUpUser = async (username, password) => {
 			classes: "success-toast",
 		});
 		setTimeout(() => {
-			location.assign("/play");
+			location.assign("/");
 		}, 2000);
 	} catch (err) {
 		M.toast({ html: `${err.response.data.message}`, classes: "error-toast" });
