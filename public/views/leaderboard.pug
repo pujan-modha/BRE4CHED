@@ -7,13 +7,14 @@ mixin tableElement(rank, name, level)
     td= level
 
 block content 
-  h1(style="margin-top: 64vh;") Leaderboard
-  table(class="striped responsive-table centered leaderboard" style="width: 70vw;")
-    thead
-      tr
-        th Rank
-        th Team Name
-        th Score
-    tbody
-      each user, index in users
-        +tableElement(`${index + 1}`, user.username, user.level*2.5)
+  h1(style="margin-top: 32vh;") Leaderboard
+  div(style="height: 100vh")
+    table(class="striped responsive-table centered leaderboard" style="width: 70vw;")
+      thead
+        tr
+          th Rank
+          th Team Name
+          th Score
+      tbody
+        each user, index in users
+          +tableElement(`${index + 1}`, user.username, user.level*2.5)
